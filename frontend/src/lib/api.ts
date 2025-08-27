@@ -1,7 +1,8 @@
 import type { Parcel } from "../types/parcel";
 import { v4 as uuidv4 } from "uuid";
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001/api";
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:3001/api";
 
 // API function to fetch parcels
 export async function fetchParcels(): Promise<Parcel[]> {
@@ -13,7 +14,7 @@ export async function fetchParcels(): Promise<Parcel[]> {
 
   const data = await response.json();
   // Backend returns { success: true, count: number, parcels: [...] }
-  return data.parcels; 
+  return data.parcels;
 }
 
 // API function to update zoning
@@ -23,14 +24,14 @@ export interface ZoningUpdateRequest {
 }
 
 export async function updateZoning(request: ZoningUpdateRequest) {
-  const response = await fetch(`${API_BASE_URL}/zoning/update`, {
+  const response = await fetch(`${API_BASE_URL}/api/zoning/update`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
       ...request,
-      batchId: uuidv4(), 
+      batchId: uuidv4(),
     }),
   });
 

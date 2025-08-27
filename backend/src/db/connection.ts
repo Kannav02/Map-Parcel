@@ -4,7 +4,10 @@ import * as schema from './schema.js'
 
 // Local database connection
 const connectionString = process.env.DATABASE_URL!
-const client = postgres(connectionString)
+const client = postgres(connectionString,{ 
+  ssl: 'require',
+  max: 1 
+})
 export const db = drizzle(client, { schema })
 
 // Remote database connection (read-only for seeding)

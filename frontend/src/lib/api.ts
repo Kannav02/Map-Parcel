@@ -24,7 +24,7 @@ export interface ZoningUpdateRequest {
 }
 
 export async function updateZoning(request: ZoningUpdateRequest) {
-  const response = await fetch(`${API_BASE_URL}/api/zoning/update`, {
+  const response = await fetch(`${API_BASE_URL}/api/zoning/update`,  {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

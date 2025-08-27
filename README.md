@@ -11,11 +11,26 @@ Interactive map application for updating property zoning classifications with fu
 
 ### Run the System
 
-1. **Start Backend** (Port 3001)
+1. **Setup Backend** (Port 3001)
 
    ```bash
    cd backend
+   
+   # Copy environment file and update with your database credentials
+   cp .env.example .env
+   
    bun install
+
+   # Generate database schema
+   bun run db:generate
+
+   # Run migrations to create tables
+   bun run db:migrate
+
+   # Seed database with parcel data
+   bun run seed
+
+   # Start development server
    bun run dev
    ```
 
@@ -23,15 +38,16 @@ Interactive map application for updating property zoning classifications with fu
 
    ```bash
    cd frontend
-   npm install
-   npm run dev
+   cp .env.example .env
+   bun install
+   bun run dev
    ```
 
 3. **Access Application**
    - Open: http://localhost:5173
    - Backend API: http://localhost:3001
 
-## 🎯 How It Works
+## How It Works
 
 1. **Select Parcels**: Click on map parcels to select/deselect them (red border = selected)
 2. **Choose Zoning**: Pick new zoning type from dropdown in sidebar
@@ -52,11 +68,10 @@ Interactive map application for updating property zoning classifications with fu
 - **Validation**: Backend strictly validates zoning types - frontend must match exactly
 - **Transactions**: All updates are atomic (all parcels updated or none)
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Frontend**: React + TypeScript, Leaflet Maps, Zustand (state), React Query (server side data)
 - **Backend**: Bun + Express, Drizzle ORM, Zod validation
 - **Database**: PostgreSQL and wkx for geometry data
 
 ---
-

@@ -9,7 +9,7 @@ async function seedParcelData() {
     console.log('Fetching parcel data from remote database...')
     
     // Fetch parcel data from remote (limit for testing)
-    const remoteData = await remoteClient`SELECT * FROM real_estate_zoning LIMIT 100`
+    const remoteData = await remoteClient`SELECT * FROM real_estate_zoning`
     
     console.log(`Found ${remoteData.length} parcels in remote database`)
     

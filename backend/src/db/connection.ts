@@ -18,7 +18,7 @@ export const remoteClient = postgres(remoteConnectionString);
 export async function testConnection() {
   try {
     await client`SELECT 1`;
-    console.log("Local database connected");
+    console.log("database connected");
     return true;
   } catch (error) {
     console.error("Database connection failed:", error);

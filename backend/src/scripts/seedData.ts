@@ -6,16 +6,15 @@ dotenv.config()
 
 async function seedParcelData() {
   try {
-    console.log('Fetching parcel data from remote database...')
+    
     
     // Fetch parcel data from remote (limit for testing)
     const remoteData = await remoteClient`SELECT * FROM real_estate_zoning`
     
-    console.log(`Found ${remoteData.length} parcels in remote database`)
     
     // Clear existing local data
     await db.delete(realEstateZoning)
-    console.log('Cleared existing local parcel data')
+    
     
     // Transform remote data to match local schema
     const transformedData = remoteData.map(row => ({
@@ -30,7 +29,7 @@ async function seedParcelData() {
     // Insert in batches
     await db.insert(realEstateZoning).values(transformedData)
     
-    console.log(`Successfully seeded ${transformedData.length} parcels into local database`)
+    console.log(`Successfully seeded parcels into local database`)
     
   } catch (error) {
     console.error('Error fetching remote data:', error)

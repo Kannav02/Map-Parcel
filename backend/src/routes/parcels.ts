@@ -7,12 +7,12 @@ const router = express.Router()
 
 router.get('/', async (req, res) => {
   try {
-    console.log('Fetching parcels from database...')
+    
     
     // Get parcels from database
     const parcels = await db.select().from(realEstateZoning)
     
-    console.log(`Found ${parcels.length} parcels`)
+    
     
     // Convert WKB geometry to GeoJSON in place
     const parcelsWithGeoJSON = parcels.map(row => ({

@@ -37,7 +37,6 @@ function App() {
         newZoning: selectedZoning,
       });
 
-      console.log("Update successful:", result);
       clearSelection();
 
       // refetching again to show the updated data here

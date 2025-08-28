@@ -15,7 +15,7 @@ const updateZoningSchema = z.object({
 
 router.post("/update", async (req, res) => {
   try {
-    console.log("Zoning update request:", req.body);
+
 
     // Validate input
     const { parcelIds, newZoning, batchId } = updateZoningSchema.parse(
@@ -33,7 +33,7 @@ router.post("/update", async (req, res) => {
         .from(realEstateZoning)
         .where(inArray(realEstateZoning.id, parcelIds));
 
-      console.log(`Found ${currentParcels.length} parcels to update`);
+
 
       if (currentParcels.length !== parcelIds.length) {
         throw new Error(
@@ -48,7 +48,7 @@ router.post("/update", async (req, res) => {
         .where(inArray(realEstateZoning.id, parcelIds))
         .returning();
 
-      console.log(`Updated ${updatedParcels.length} parcels`);
+
 
       // 3. Create audit log entries
       const auditEntries = currentParcels.map((parcel) => ({
@@ -64,7 +64,7 @@ router.post("/update", async (req, res) => {
 
       await trx.insert(zoningAuditLogs).values(auditEntries);
 
-      console.log(`Created ${auditEntries.length} audit log entries`);
+      
 
       return {
         updatedCount: updatedParcels.length,
